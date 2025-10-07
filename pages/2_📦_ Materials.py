@@ -37,7 +37,7 @@ with content_container:
     with tab_link:
     # Store the URLs in a dict
         link_dict = {
-            "GitHub Repo": "https://github.com/your‑repo",
+            "GitHub Repo": "https://github.com/doingMyBest/streamlit_output_evaluation",
             "Preprint":    "https://arxiv.org/abs/2509.26205",
             "Project Website":    "https://papermaker.ai/",
         }   
