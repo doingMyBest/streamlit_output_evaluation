@@ -1,0 +1,18 @@
+# Streamlit and Python ignores
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/
+.env/
+.DS_Store
+
+# VS Code files
+.vscode/
+
+# Streamlit folders
+.streamlit/
+
+# Cache or temporary files
+*.log
