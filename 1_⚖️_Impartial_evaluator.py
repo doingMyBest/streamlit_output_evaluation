@@ -53,7 +53,7 @@ with col2:
 
     with st.form("upload_form"):
         excel_file = st.file_uploader("Upload an excel sheet", type=["xlsx"])
-        upload_file = st.form_submit_button("Upload File")
+        upload_file = st.form_submit_button("Confirm Upload")
         if excel_file is not None and upload_file:
             try:
                 st.success("File uploaded")
