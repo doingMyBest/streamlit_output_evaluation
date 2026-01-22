@@ -15,4 +15,4 @@ If you use any of the contents, please use the proper reference:
       url={https://arxiv.org/abs/2509.26205}, 
 }</pre>
 # Acknowledgements
-We want to thank Juliane Zietz for working developing an initial draft of the questionnaire.
+We want to thank Juliane Zietz for developing an initial draft of the questionnaire.
