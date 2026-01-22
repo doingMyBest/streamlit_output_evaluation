@@ -2,7 +2,7 @@ from openai import OpenAI, AuthenticationError, OpenAIError
 import joblib
 
 evaluation_criteria_dict = {
-        "Coherence (Logical)": {
+    "Coherence (Logical)": {
         "description": "Logical response forms a narrative without contradictions. E.g., Is the response well-structured in terms of content?",
         "scoring": {
             5: "clearly structured line of reasoning; individual statements are understandable and without contradictions",
@@ -13,33 +13,33 @@ evaluation_criteria_dict = {
         }
     },
         "Coherence (Stylistic)": {
-        "description":  "Consistent use of visual text formatting E.g. is highlighting or bullet points used consistently?",
+        "description": "Uniform language use E.g. Does the writing tone stay consistent? Use of visual text formatting E.g. is highlighting or bullet points used?",
         "scoring": {
-            5: "consistent use of formatting",
+            5: "uniform language use; appropriate use of paragraphs and formatting (highlighting, bullet points etc.)",
             4: "between 5 and 3",
-            3: "some consistent use of  formatting",
+            3: "uniform language use; structured with paragraphs, formatting (highlighting, bullet points etc.) is missing or lacking",
             2: "between 3 and 1",
-            1: "no consistent use of formatting"
+            1: "no uniform language use and/or no clear sections or paragraphs, no formatting (highlighting, bullet points etc.)"
         }
     },
-        "Consistency (Language)": {
-        "description": "Consistent language use E.g. Does the writing tone stay consistent?",
+    "Correctness (User Intent)": {
+        "description": "Information aligns with user's thematic information need (statement fits user intent)",
+        "scoring": {
+            5: "response fits the thematic context of the prompt",
+            4: "between 5 and 3",
+            3: "response fits the thematic context of the prompt partially",
+            2: "between 3 and 1",
+            1: "response fails to fit the thematic context of user's needs/prompt"
+        }
+    },
+    "Consistency (Language)": {
+        "description": "Consistent language use. E.g., “Does the writing tone stay consistent?”",
         "scoring": {
             5: "consistent language use",
             4: "between 5 and 3",
             3: "partially consistent language use",
             2: "between 3 and 1",
             1: "inconsistent language use"
-        }
-    },
-    "Correctness (User intent)": {
-        "description": "information alignes with user's thematic information need (statement fits user intent)",
-        "scoring": {
-            5: "response fits the thematic context of the query",
-            4: "between 5 and 3",
-            3: "response fits the thematic context of the query partially",
-            2: "between 3 and 1",
-            1: "response fails to fits the thematic context of user's needs/query"
         }
     },
     "Correctness (Language)": {
@@ -52,8 +52,8 @@ evaluation_criteria_dict = {
             1: "incorrect language (lexically and grammatically)"
         }
     },
-        "Clarity (Language)": {
-        "description": "concise, comprehensible, user-accessible and well-spoken language",
+    "Clarity (Language)": {
+        "description": "Concise, comprehensible, user- accessible and well - spoken language",
         "scoring": {
             5: "clear language / meeting conversation style",
             4: "between 5 and 3",
@@ -62,7 +62,7 @@ evaluation_criteria_dict = {
             1: "unclear language / missing conversation style"
         }
     },
-            "Clarity (Saliency)": {
+        "Clarity (Saliency)": {
         "description": "how well key information is placed within the textual response.",
         "scoring": {
             5: "key information is completely salient",
@@ -72,7 +72,7 @@ evaluation_criteria_dict = {
             1: "key information is not salient"
         }
     },
-    "Cyclicality (Content)": {
+	 "Cyclicality (Content)": {
         "description": "Does the output contain content-related or literal repetitions?",
         "scoring": {
             5: "no repetitions (content-related or literal)",
@@ -83,7 +83,6 @@ evaluation_criteria_dict = {
         }
     }
 }
-
 
 def evaluate_outputs_single_chat(api_key, prompt_output_dict, response_cache, cache_file, evaluation_criteria_dict = evaluation_criteria_dict ):
     """Uses the LLM to evaluate prompt-output pairs."""
