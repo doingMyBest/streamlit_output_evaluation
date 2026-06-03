@@ -5,7 +5,6 @@ import joblib
 import pathlib
 import os
 import io
-import re
 from utils import evaluate_outputs_single_chat
 
 #Function to load CSS from the 'assets' folder
@@ -27,29 +26,17 @@ if os.path.exists(cache_file):
 else:
     response_cache = {}
 
-#api key pattern to match sk- and any number of alphanumeric characters including minus and underscore
-api_key_pattern = r"^sk-[A-Za-z0-9_\-]*$"
+#load api key from secrets if available
+if "api_key" not in st.session_state:
+    if "api_key" in st.secrets:
+        st.session_state["api_key"] = st.secrets["api_key"]
+        st.session_state["submitted"] = True
 
 #create a column layout
 col1, col2, col3 = st.columns([1, 4, 1])
 with col2:
     #Title of the document
     st.markdown("# ⚖️ Impartial Evaluator")
-    #Form
-    with st.form("api_key_form"):
-        api_key = st.text_input(label='Please enter your OpenAI Api Key', type="password", placeholder="sk-...")
-        submitted = st.form_submit_button("Submit")
-
-        #if submitted then show a sucess and update session states
-        if submitted:
-            if re.fullmatch(api_key_pattern, api_key):
-                st.success("Valid API key format.")
-                st.session_state['api_key'] = api_key
-                st.session_state["submitted"] = True
-                #error if input does not match regex
-            else:
-                st.error("Invalid API key format.")
-                #form to upload excel file
 
     with st.form("upload_form"):
         excel_file = st.file_uploader("Upload an excel sheet", type=["xlsx"])

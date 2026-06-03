@@ -86,7 +86,7 @@ evaluation_criteria_dict = {
 
 def evaluate_outputs_single_chat(api_key, prompt_output_dict, response_cache, cache_file, evaluation_criteria_dict = evaluation_criteria_dict ):
     """Uses the LLM to evaluate prompt-output pairs."""
-    client = OpenAI(api_key=api_key)
+    client = OpenAI(api_key=api_key, base_url="https://llm.scads.ai/v1/")
     ratings = {}
     used_cache_once = False
     for user_prompt, output in prompt_output_dict.items():
@@ -121,7 +121,7 @@ def evaluate_outputs_single_chat(api_key, prompt_output_dict, response_cache, ca
                 response_cache[prompt][user_prompt][output] = {}
                 try:
                     response = client.chat.completions.create(
-                        model="gpt-4o",
+                        model="openai/gpt-oss-120b",
                         messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}],
                         temperature=0
                      )
